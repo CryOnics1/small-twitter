@@ -1,0 +1,30 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "artem.chernyh@noveogroup.com",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "koa": "^2.4.1",
+    "koa-convert": "^1.2.0",
+    "koa-router": "^7.3.0",
+    "koa2-cors": "^2.0.5",
+    "mongoose": "^4.13.7",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "migrate": "^1.0.1",
+    "pm2": "^2.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 startOrRestart ecosystem.config.js --env development",
+    "start-stage": "pm2 startOrRestart ecosystem.config.js --env stage",
+    "dev": "node_modules/.bin/nodemon bin/app.js",
+    "migrate": "./node_modules/.bin/migrate --template-file migrations/template.js"
+  }
+}
