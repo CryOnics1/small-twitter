@@ -16,6 +16,7 @@ module.exports = rules => async (ctx, next) => {
     if (!_.isEmpty(ctx.query)) {
         request.query = ctx.query;
     }
+
     const result = Joi.validate(request, rules(), {
         abortEarly: false,
         stripUnknown: false
@@ -23,18 +24,22 @@ module.exports = rules => async (ctx, next) => {
 
     if (result.error) {
         const errors = {};
+        const errorData = {};
         result.error.details.forEach((e) => {
-            if (!errors[e.path]) {
-                errors[e.path] = [];
+            if (!errorData[e.context.label]) {
+                errorData[e.context.label] = [];
             }
-            errors[e.path].push({
+            errorData[e.context.label].push({
                 type: e.type,
                 message: e.message
             });
         });
-
+        errors.name = result.error.name;
+        errors.data = errorData;
         ctx.body = { errors };
+        ctx.status = 400;
         return;
     }
+
     await next();
 };
