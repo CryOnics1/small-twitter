@@ -7,4 +7,12 @@ module.exports = {
 
         return savedUser;
     },
+
+    async findById(id) {
+        return User.findById(id);
+    },
+
+    async findByEmail(email) {
+        return User.findOne({ email });
+    },
 };

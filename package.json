@@ -10,6 +10,7 @@
     "dotenv-extended": "^2.0.1",
     "joi": "^13.0.2",
     "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.1.1",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
