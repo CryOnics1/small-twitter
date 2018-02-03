@@ -1,5 +1,6 @@
 const userController = require('../controllers/userController');
+const { isAuthenticated } = require('../middlewares');
 
 module.exports = (router) => {
-    router.get('/me', userController.me);
+    router.get('/api/profile', isAuthenticated, userController.profile);
 };

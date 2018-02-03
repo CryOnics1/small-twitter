@@ -4,8 +4,7 @@ const router = new Router();
 
 require('./auth')(router);
 require('./user')(router);
-
-router.get('/', async ctx => ctx.body = 'hello');
+require('./post')(router);
 
 module.exports = (app) => {
     app.use(router.routes());
