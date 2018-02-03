@@ -1,4 +1,5 @@
 const { postRepository } = require('../repositories');
+const postFormatter = require('../formatters/postFormatter');
 
 module.exports = {
     async createPosts(ctx) {
@@ -11,6 +12,6 @@ module.exports = {
     async posts(ctx) {
         const { id } = ctx.user;
         const posts = await postRepository.findPostsByUserId(id);
-        ctx.body = posts;
+        ctx.body = postFormatter.list(posts);
     },
 };
