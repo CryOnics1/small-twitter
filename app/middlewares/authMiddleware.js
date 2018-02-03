@@ -1,21 +1,21 @@
-const UserRepository = require('../repositories/userRepository');
-const jsonwebtoken = require('jsonwebtoken');
+const { UnauthorizedException } = require('../exceptions');
+const errorMessages = require('../../config/errorMessages');
+const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
 const auth = async (ctx, next) => {
-    // if (ctx.headers && ctx.headers.authorization) {
-    //     try {
-    //         const result = await jsonwebtoken.verify(ctx.headers.authorization, config.jwt.secretKey);
-    //         if (result && result.email) {
-    //             ctx.state.user = result;
-    //         }
-    //     } catch (err) {
-    //         ctx.status = 401;
-    //         ctx.body = { err };
-    //     }
+    if (!ctx.headers && !ctx.headers.authorization) {
+        throw new UnauthorizedException(errorMessages.tokenRequired);
+    }
 
-    //     await next();
-    // }
+    const result = await jwt.verify(ctx.headers.authorization, config.jwt.secretKey);
+    if (!result && !result.data) {
+        throw new UnauthorizedException(errorMessages.tokenInvalid);
+    }
+
+    ctx.user = result.data;
+
+    await next();
 };
 
 module.exports = auth;
