@@ -20,9 +20,16 @@ module.exports = {
     },
 
     /**
+     * @param {String} id - replyId
+     */
+    async findById(id) {
+        return Reply.findById(id);
+    },
+
+    /**
      * @param {String} post - postId
      */
     async findByPost(post) {
-        return Reply.find({ post });
+        return Reply.find({ post }).populate('user');
     },
 };

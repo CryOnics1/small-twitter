@@ -7,4 +7,5 @@ module.exports = {
     forbidden: 'FORBIDDEN',
     badRequest: 'BAD_REQUEST',
     postNotFound: 'POST_NOT_FOUND',
+    replyNotFound: 'REPLY_NOT_FOUND',
 };

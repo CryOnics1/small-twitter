@@ -39,7 +39,7 @@ module.exports = {
             throw new PermissionDeniedException(errorMessages.forbidden);
         }
 
-        post.remove();
+        await post.remove();
         ctx.status = 200;
     }
 };
