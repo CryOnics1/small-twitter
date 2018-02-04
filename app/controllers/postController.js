@@ -1,5 +1,7 @@
 const { postRepository, replyRepository } = require('../repositories');
 const postFormatter = require('../formatters/postFormatter');
+const { PermissionDeniedException, NotFoundException } = require('../exceptions');
+const errorMessages = require('../../config/errorMessages');
 
 module.exports = {
     async createPost(ctx) {
@@ -7,7 +9,7 @@ module.exports = {
         const { id: userId } = ctx.user;
         const posts = await postRepository.createPost(userId, text);
 
-        ctx.body = posts;
+        ctx.body = postFormatter.get(posts);
     },
 
     async getPosts(ctx) {
@@ -24,4 +26,20 @@ module.exports = {
 
         ctx.body = postFormatter.getWithReply(post);
     },
+
+    async deletePost(ctx) {
+        const { id: userId } = ctx.user;
+        const { id: postId } = ctx.request.body;
+        const post = await postRepository.findById(postId);
+        if (!post) {
+            throw new NotFoundException(errorMessages.postNotFound);
+        }
+
+        if (post.user.toString() !== userId.toString()) {
+            throw new PermissionDeniedException(errorMessages.forbidden);
+        }
+
+        post.remove();
+        ctx.status = 200;
+    }
 };

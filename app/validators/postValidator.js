@@ -8,4 +8,11 @@ module.exports = {
             })
         };
     },
+    deletePost() {
+        return {
+            body: Joi.object().keys({
+                id: Joi.string().required(),
+            })
+        };
+    }
 };

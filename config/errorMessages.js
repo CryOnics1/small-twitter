@@ -6,4 +6,5 @@ module.exports = {
     notFound: 'NOT_FOUND',
     forbidden: 'FORBIDDEN',
     badRequest: 'BAD_REQUEST',
+    postNotFound: 'POST_NOT_FOUND',
 };

@@ -24,5 +24,5 @@ module.exports = {
      */
     async findByPost(post) {
         return Reply.find({ post });
-    }
+    },
 };

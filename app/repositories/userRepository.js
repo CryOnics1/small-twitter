@@ -15,4 +15,8 @@ module.exports = {
     async findByEmail(email) {
         return User.findOne({ email });
     },
+
+    async findUsers() {
+        return User.find();
+    },
 };
