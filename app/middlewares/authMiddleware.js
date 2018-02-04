@@ -8,11 +8,13 @@ const auth = async (ctx, next) => {
         throw new UnauthorizedException(errorMessages.tokenRequired);
     }
 
-    const result = await jwt.verify(ctx.headers.authorization, config.jwt.secretKey);
-    if (!result && !result.data) {
-        throw new UnauthorizedException(errorMessages.tokenInvalid);
-    }
+    const result = await jwt.verify(ctx.headers.authorization, config.jwt.secretKey, (err, decoded) => {
+        if (err) {
+            throw new UnauthorizedException(errorMessages.tokenInvalid);
+        }
 
+        return decoded;
+    });
     ctx.user = result.data;
 
     await next();
