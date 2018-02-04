@@ -23,7 +23,6 @@ module.exports = rules => async (ctx, next) => {
     });
 
     if (result.error) {
-        const errors = {};
         const errorData = {};
         result.error.details.forEach((e) => {
             if (!errorData[e.context.label]) {
@@ -34,9 +33,10 @@ module.exports = rules => async (ctx, next) => {
                 message: e.message
             });
         });
-        errors.name = result.error.name;
-        errors.data = errorData;
-        ctx.body = { errors };
+        ctx.body = {
+            error: result.error.name,
+            invalid: errorData,
+        };
         ctx.status = 400;
         return;
     }

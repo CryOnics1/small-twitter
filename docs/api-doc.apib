@@ -1,0 +1,37 @@
+FORMAT: 1A
+HOST: http://localhost:8085/
+
+# 0. Authorization 
+
+All requests must contain header `Authorization`. That header’s value is an jsonwebtoken. 
+Jsonwebtoken expires in 1 hours. Request with expired jsonwebtoken will cause an error. HTTP code for such request will be `401 Unauthorized`. 
+To continue, you must re-authorize and get new token.
+
+## 1.1. SignIn [/api/login]
+
+### 1.1.SignIn [POST]
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "email": "candy@gmail.com",
+                "password": "123"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "token": "{random-token}"
+            }   
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "Invalid password or email"
+            }

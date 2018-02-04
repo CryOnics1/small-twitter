@@ -2,7 +2,7 @@ const { postRepository, replyRepository } = require('../repositories');
 const postFormatter = require('../formatters/postFormatter');
 
 module.exports = {
-    async createPosts(ctx) {
+    async createPost(ctx) {
         const { text } = ctx.request.body;
         const { id: userId } = ctx.user;
         const posts = await postRepository.createPost(userId, text);
