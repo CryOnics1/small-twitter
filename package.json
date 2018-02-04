@@ -4,6 +4,9 @@
   "main": "app.js",
   "author": "artem.chernyh@noveogroup.com",
   "license": "MIT",
+  "engines": {
+    "node": "8.9.4 || 8.9.x"
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "dotenv": "^4.0.0",
