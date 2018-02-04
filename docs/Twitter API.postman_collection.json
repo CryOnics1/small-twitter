@@ -1,0 +1,298 @@
+{
+	"info": {
+		"name": "Twitter API",
+		"_postman_id": "ec3a5aac-4b93-d3f4-d6be-3d7572d55852",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b29e7534-81d9-4c6c-9ed2-ca348a43be69",
+						"type": "text/javascript",
+						"exec": [
+							"var json = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", json.token);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"candy@gmail.com\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "2. User profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"candy@gmail.com\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"profile"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "3. Posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"candy@gmail.com\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "3.1. Create post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Привет!!!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"post"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "3.2. Delete post",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"5a76d714e0172b5d21f16481\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/post/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"post",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "4. Replies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"reply 1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/post/5a76e37c3f279c7ffce339c8/replies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"post",
+						"5a76e37c3f279c7ffce339c8",
+						"replies"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "4.1 Create reply",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"reply 1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/post/5a76e37c3f279c7ffce339c8/reply",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"post",
+						"5a76e37c3f279c7ffce339c8",
+						"reply"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "4.2 Delete reply",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/reply/5a76e4e096690804b6464a9b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"reply",
+						"5a76e4e096690804b6464a9b"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
