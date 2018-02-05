@@ -24,10 +24,12 @@ Run application with follow command (run server):
 $ yarn start # run server
 ```
 
-**API documentation**
+## API documentation
+
 Go to /docs/api-doc.html
 
-**Postman collection**
+## Postman collection
+
 You can import postman collection for requests to API 
 
 ```
