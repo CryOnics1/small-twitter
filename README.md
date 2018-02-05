@@ -23,7 +23,15 @@ Run application with follow command (run server):
 ```bash
 $ yarn start # run server
 ```
-Go to **http://localhost:8085**.
+
+**Postman collection**
+You can import postman collection for requests to API 
+
+```
+docs/Twitter API.postman_collection.json
+```
+
+**http://localhost:8085**.
 
 **Test users**:
 
