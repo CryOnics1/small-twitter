@@ -16,6 +16,10 @@ module.exports = {
         return User.findOne({ email });
     },
 
+    async findByName(name) {
+        return User.findOne({ name });
+    },
+
     async findUsers() {
         return User.find();
     },

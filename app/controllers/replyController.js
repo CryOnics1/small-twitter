@@ -1,4 +1,4 @@
-const { replyRepository } = require('../repositories');
+const { replyRepository, postRepository } = require('../repositories');
 const replyFormatter = require('../formatters/replyFormatter');
 const { NotFoundException, PermissionDeniedException } = require('../exceptions');
 const errorMessages = require('../../config/errorMessages');
@@ -8,6 +8,11 @@ module.exports = {
         const { id: postId } = ctx.params;
         const { text } = ctx.request.body;
         const { id: userId } = ctx.user;
+        const post = await postRepository.findById(postId);
+        if (!post) {
+            throw new NotFoundException(errorMessages.postNotFound);
+        }
+
         const reply = await replyRepository.createReply(userId, postId, text);
 
         ctx.body = replyFormatter.get(reply);

@@ -10,8 +10,8 @@ module.exports = {
     },
 
     async getProfile(ctx) {
-        const { id: userId } = ctx.params;
-        const user = await userRepository.findById(userId);
+        const { name: userName } = ctx.params;
+        const user = await userRepository.findByName(userName);
         if (!user) {
             throw new NotFoundException(errorMessages.userNotFound);
         }
@@ -20,13 +20,13 @@ module.exports = {
     },
 
     async getUserPost(ctx) {
-        const { id: userId } = ctx.params;
-        const user = await userRepository.findById(userId);
+        const { name: userName } = ctx.params;
+        const user = await userRepository.findByName(userName);
         if (!user) {
             throw new NotFoundException(errorMessages.userNotFound);
         }
 
-        const posts = await postRepository.findPostsByUserId(userId);
+        const posts = await postRepository.findPostsByUserId(user._id);
 
         ctx.body = postFormatter.list(posts);
     },

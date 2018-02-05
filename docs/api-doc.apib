@@ -7,7 +7,7 @@ All requests must contain header `Authorization`. That header’s value is an js
 Jsonwebtoken expires in 1 hours. Request with expired jsonwebtoken will cause an error. HTTP code for such request will be `401 Unauthorized`. 
 To continue, you must re-authorize and get new token.
 
-## 1.1. SignIn [/api/login]
+## 1. SignIn [/api/login]
 
 ### 1.1.SignIn [POST]
 
@@ -35,3 +35,356 @@ To continue, you must re-authorize and get new token.
             {
                 "error": "Invalid password or email"
             }
+
+## 2. User [/api/profile]
+
+### 2.1. My profile [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "5a7167ba91688e4d602e1fe3",
+                "email": "candy@gmail.com",
+                "name": "candy"
+            }  
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }
+
+### 2.2. User Profile [GET /api/user/{user_name}/profile]
+
++ Parameters
+
+    + user_name (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "5a7167ba91688e4d602e1fe2",
+                "name": "admin",
+                "createdAt": "2018-01-31 06:52",
+                "updatedAt": "2018-02-05 03:37"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }
+
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "error": "USER_NOT_FOUND"
+            }
+
+### 2.3. User posts [GET /api/user/{user_name}/posts]
+
++ Parameters
+
+    + user_name (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "id": "5a77dbe15d7db24d2ccc1435",
+                    "text": "Привет!",
+                    "createdAt": "2018-02-05 04:21",
+                    "updatedAt": "2018-02-05 04:36"
+                },
+                {
+                    "id": "5a75fdb5f3eb3626684faba3",
+                    "text": "Hello!!",
+                    "createdAt": "2018-02-03 18:21",
+                    "updatedAt": "2018-02-05 04:36"
+                }
+            ]
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }
+
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "error": "USER_NOT_FOUND"
+            }
+
+## 3. Posts [/api/posts]  
+
+### 3.1 User posts [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "id": "5a77dbe15d7db24d2ccc1435",
+                    "text": "Привет!",
+                    "createdAt": "2018-02-05 04:21",
+                    "updatedAt": "2018-02-05 04:36"
+                },
+                {
+                    "id": "5a75fdb5f3eb3626684faba3",
+                    "text": "Hello!!",
+                    "createdAt": "2018-02-03 18:21",
+                    "updatedAt": "2018-02-05 04:36"
+                }
+            ]
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }
+
+### 3.2 Create post [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
+    + Body
+
+            {
+                "text": "Привет!!!"
+            }            
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "5a77e0b9a211d0549b0e50d0",
+                "text": "Привет!!!",
+                "createdAt": "2018-02-05 04:42",
+                "updatedAt": "2018-02-05 04:42"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }            
+
+### 3.3 Delete post [DELETE /api/post/{post_id}]
+
++ Parameters
+
+    + post_id (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}       
+
++ Response 200 (application/json)
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }                        
+
++ Response 403 (application/json)
+
+    + Body
+    
+            {
+                "error": "FORBIDDEN"
+            } 
+            
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "error": "POST_NOT_FOUND"
+            }    
+     
+## 4. Replies [/api/post/{post_id}/replies] 
+
+### 4.1 Replies post [GET]
+
++ Parameters
+
+    + post_id (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "id": "5a77dabb798bb948321194ca",
+                    "userId": "5a7167ba91688e4d602e1fe3",
+                    "author": "admin",
+                    "text": "reply 1",
+                    "createdAt": "2018-02-05 04:16",
+                    "updatedAt": "2018-02-05 04:50"
+                },
+                {
+                    "id": "5a77dada798bb948321194cc",
+                    "userId": "5a7167ba91688e4d602e1fe3",
+                    "author": "candy",
+                    "text": "reply 2",
+                    "createdAt": "2018-02-05 04:17",
+                    "updatedAt": "2018-02-05 04:50"
+                }
+            ]
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }            
+
+### 4.2 Create reply [POST]
+
++ Parameters
+
+    + post_id (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}
+
+    + Body
+
+            {
+                "text": "reply 1"
+            }            
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": "5a77dabb798bb948321194ca",
+                "userId": "5a7167ba91688e4d602e1fe3",
+                "author": "admin",
+                "text": "reply 1",
+                "createdAt": "2018-02-05 04:16",
+                "updatedAt": "2018-02-05 04:50"
+            }
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }  
+
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "error": "POST_NOT_FOUND"
+            }         
+
+
+### 4.3 Delete reply [DELETE /api/reply/{post_id}]
+
++ Parameters
+
+    + post_id (required, string)
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: {token}         
+
++ Response 200 (application/json)
+
++ Response 401 (application/json)
+
+    + Body
+    
+            {
+                "error": "INVALID_TOKEN"
+            }  
+
++ Response 403 (application/json)
+
+    + Body
+    
+            {
+                "error": "FORBIDDEN"
+            }  
+
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "error": "REPLY_NOT_FOUND"
+            }         

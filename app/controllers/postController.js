@@ -29,7 +29,7 @@ module.exports = {
 
     async deletePost(ctx) {
         const { id: userId } = ctx.user;
-        const { id: postId } = ctx.request.body;
+        const { id: postId } = ctx.params;
         const post = await postRepository.findById(postId);
         if (!post) {
             throw new NotFoundException(errorMessages.postNotFound);
