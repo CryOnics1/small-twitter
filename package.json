@@ -4,12 +4,23 @@
   "main": "app.js",
   "author": "artem.chernyh@noveogroup.com",
   "license": "MIT",
+  "engines": {
+    "node": "8.9.4 || 8.9.x"
+  },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "dotenv": "^4.0.0",
+    "dotenv-extended": "^2.0.1",
+    "joi": "^13.0.2",
+    "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.1.1",
     "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
     "koa-router": "^7.3.0",
     "koa2-cors": "^2.0.5",
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "mongoose": "^4.13.7",
     "winston": "^2.4.0"
   },
@@ -17,7 +28,7 @@
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "migrate": "^1.0.1",
+    "migrate": "^0.2.4",
     "pm2": "^2.9.1"
   },
   "scripts": {

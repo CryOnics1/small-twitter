@@ -14,4 +14,7 @@ module.exports = {
         },
         logging: process.env.MONGO_LOGGING !== 'false'
     },
+    jwt: {
+        secretKey: process.env.SECRET_KEY,
+    },
 };
