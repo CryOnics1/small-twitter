@@ -1,6 +1,6 @@
 module.exports = {
-    invalidPassword: 'Invalid password or email',
-    emailNotFound: 'Пользователь с таким Email не найден',
+    invalidPassword: 'INVALID_PASSWORD_OR_EMAIL',
+    emailNotFound: 'EMAIL_NOT_FOUND',
     tokenRequired: 'TOKEN_REQUIRED',
     tokenInvalid: 'INVALID_TOKEN',
     notFound: 'NOT_FOUND',

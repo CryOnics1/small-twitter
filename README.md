@@ -30,13 +30,13 @@ Go to /docs/api-doc.html
 
 ## Postman collection
 
-You can import postman collection for requests to API 
+You can import postman collection for requests to API
 
 ```
 docs/Twitter API.postman_collection.json
 ```
 
-**http://localhost:8085**.
+**http://localhost:8085/api-doc.html**.
 
 **Test users**:
 
