@@ -4,6 +4,12 @@ const config = require('../config');
 const mongoose = require('./mongoose');
 
 class Application extends Koa {
+    async connectMongoose() {
+        if (mongoose.connection.readyState !== 1) {
+            await mongoose.connect(config.mongoose.uri, config.mongoose.options);
+        }
+    }
+
     async start() {
         logger.info('App enviroment (process.env.NODE_ENV): %s', process.env.NODE_ENV);
         await this.connectMongoose();
@@ -19,12 +25,6 @@ class Application extends Koa {
                 logger.info('Stop listening on host %s:%s', config.host, config.port);
             }
         });
-    }
-
-    async connectMongoose() {
-        if (mongoose.connection.readyState !== 1) {
-            await mongoose.connect(config.mongoose.uri, config.mongoose.options);
-        }
     }
 }
 

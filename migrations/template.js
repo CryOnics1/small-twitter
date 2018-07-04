@@ -1,4 +1,4 @@
-require('dotenv-extended').load();
+require('dotenv').load();
 require('./utils');
 
 exports.up = async (next) => {

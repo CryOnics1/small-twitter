@@ -1,4 +1,4 @@
-require('dotenv-extended').load();
+require('dotenv').load();
 require('./utils');
 const { User } = require('../app/models');
 const userRepository = require('../app/repositories/userRepository');
@@ -15,9 +15,7 @@ const users = [{
 }];
 
 exports.up = async (next) => {
-    await Promise.all(users.map(async (userData) => {
-        await userRepository.createUser(userData);
-    }));
+    await Promise.all(users.map(userRepository.createUser));
     next();
 };
 
